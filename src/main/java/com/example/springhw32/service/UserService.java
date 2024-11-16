@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -16,14 +18,14 @@ public class UserService {
     @Transactional
     public UserDto join(UserDto userDto) {
 
-        if (userDto.getUsername() == null || userDto.getUsername().isEmpty()) {
-            throw new RuntimeException("아이디를 입력해 주세요.");
+        if (userDto.getUsername().isBlank()) {
+            throw new NoSuchElementException("아이디를 입력해 주세요.");
         }
-        if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
-            throw new RuntimeException("비밀번호를 입력해 주세요.");
+        if (userDto.getPassword().isBlank()) {
+            throw new NoSuchElementException("비밀번호를 입력해 주세요.");
         }
-        if (userDto.getNickname() == null || userDto.getNickname().isEmpty()) {
-            throw new RuntimeException("닉네임을 입력해 주세요.");
+        if (userDto.getNickname().isBlank()) {
+            throw new NoSuchElementException("닉네임을 입력해 주세요.");
         }
 
         if (userRepository.existsByUsername(userDto.getUsername())) {
@@ -40,6 +42,14 @@ public class UserService {
 
         userRepository.save(user);
         return userDto;
+    }
+
+    public String login(UserDto userDto) {
+        User user = userRepository.findByUsername(userDto.getUsername());
+        if (user != null && user.getPassword().equals(userDto.getPassword())) {
+            return user.getNickname() + " 님, 환영합니다!!";
+        }
+        return "아이디 및 비밀번호가 일치하지 않습니다.";
     }
 
 }

@@ -11,13 +11,15 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long commentId;
 
+    @Column(nullable = false)
     private String content;
 
-    private String writer;
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
     private Post post;
 }

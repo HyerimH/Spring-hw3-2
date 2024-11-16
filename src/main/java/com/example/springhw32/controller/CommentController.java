@@ -15,14 +15,14 @@ public class CommentController {
     private final CommentService commentService;
 
     // 댓글 작성
-    @PostMapping
-    public CommentDto createComment(@RequestBody CommentDto commentDto) {
-        return commentService.createComment(commentDto); // 댓글 생성
+    @PostMapping("/{postId}")
+    public CommentDto createComment(@RequestBody CommentDto commentDto, @PathVariable Long postId) {
+        return commentService.createComment(commentDto, postId);
     }
 
     // 특정 게시물에 달린 모든 댓글 조회
     @GetMapping("/{postId}")
     public List<CommentDto> getAllCommentsByPostId(@PathVariable Long postId) {
-        return commentService.getAllCommentsByPostId(postId); // 댓글 목록 조회
+        return commentService.getAllCommentsByPostId(postId);
     }
 }

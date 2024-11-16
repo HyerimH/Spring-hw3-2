@@ -3,6 +3,8 @@ package com.example.springhw32.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class PostDto {
@@ -14,5 +16,9 @@ public class PostDto {
 
     private String writer;
 
-    private int commentCount;
+    private Long commentCount;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 }

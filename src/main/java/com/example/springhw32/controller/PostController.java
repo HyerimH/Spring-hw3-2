@@ -16,10 +16,9 @@ public class PostController {
 
     // 글 작성
     @PostMapping
-    public PostDto createPost(@RequestBody PostDto postDto, @RequestParam Long userId) {
-        return postService.createPost(postDto, userId);
+    public PostDto createPost(@RequestBody PostDto postDto, @RequestParam String writerNickname) {
+        return postService.createPost(postDto, writerNickname);
     }
-
     // 최신순 글 조회
     @GetMapping
     public List<PostDto> getPostsSortedByDate() {

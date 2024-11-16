@@ -20,4 +20,8 @@ public class UserController {
         return userService.join(userDto);
     }
 
+    @PostMapping("/login")
+    public String login(@ModelAttribute UserDto userDto) {
+        return userService.login(userDto);
+    }
 }
