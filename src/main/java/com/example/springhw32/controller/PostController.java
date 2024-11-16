@@ -16,8 +16,8 @@ public class PostController {
 
     // 글 작성
     @PostMapping
-    public PostDto createPost(@RequestBody PostDto postDto, @RequestParam String writerNickname) {
-        return postService.createPost(postDto, writerNickname);
+    public PostDto createPost(@RequestBody PostDto postDto, @RequestParam String writer) {
+        return postService.createPost(postDto, writer);
     }
     // 최신순 글 조회
     @GetMapping

@@ -39,8 +39,9 @@ public class UserService {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setNickname(userDto.getNickname());
-
         userRepository.save(user);
+
+        userDto.setUserId(user.getId());
         return userDto;
     }
 

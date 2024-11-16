@@ -20,8 +20,8 @@ public class PostService {
     private final UserRepository userRepository;
 
     // 글 작성
-    public PostDto createPost(PostDto postDto, String writerNickname) {
-        User user = userRepository.findByNickname(writerNickname)
+    public PostDto createPost(PostDto postDto, String writer) {
+        User user = userRepository.findByNickname(writer)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         Post post = new Post();
